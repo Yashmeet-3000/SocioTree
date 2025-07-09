@@ -1,5 +1,5 @@
 "use client"
-import Navbar from "./component/Navbar";
+import Footer from "@/app/components/Footer";
 import { Poppins } from "next/font/google";
 import { useState, useRef, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
@@ -184,6 +184,7 @@ export default function Home() {
 
 
       </main>
+      <Footer/>
 
     </>
 

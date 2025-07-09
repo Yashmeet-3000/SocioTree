@@ -8,6 +8,7 @@
 
 import clientPromise from "@/lib/mongo";
 import Link from "next/link"
+import Image from "next/image";
 export default async function Page({ params }) {
 
 
@@ -24,7 +25,7 @@ export default async function Page({ params }) {
                 <section className="w-full h-[110vh]  justify-center items-center   bg-linear-to-t from-25% from-[#6c92e6]  to-[#0d52e6] ">
                     <div className="pt-[15vh] w-1/2 mx-auto gap-y-4   flex flex-col items-center justify-center">
                         <div className="photo w-40 h-40 rounded-[41px]  ">
-                            <img className=" object-cover w-full h-full rounded-[80px] " src={result.pics} alt="" />
+                            <img className="object-cover rounded-[80px] w-full h-full "  src={result.pics} alt="" />
                         </div>
                         <div className=" flex flex-col w-fit justify-center items-center text-center gap-y-2">
                             <div className="handler text-black text-2xl font-bold">{result.handle}</div>

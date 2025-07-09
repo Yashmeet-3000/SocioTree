@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { ToastContainer, toast } from 'react-toastify'
 import { useSearchParams } from 'next/navigation'
 import Image from 'next/image'
+import router from 'next/navigation'
 
 
 const Page = () => {
@@ -62,7 +63,7 @@ const Page = () => {
             setlinks([{ link: "", linktext: "" }])
             setpics("")
             setdesc("")
-            toast.success(data.message);
+            router.push(`${process.env.NEXT_PUBLIC_HOST}${handle}`)
         }
         else toast.error(data.message);
     }
@@ -140,7 +141,8 @@ const Page = () => {
         setpics("")
         setdesc("")
         if (a.success) {
-            toast.success(a.message)
+            router.push(`${process.env.NEXT_PUBLIC_HOST}${handle}`)
+            
 
         } else {
             toast.error(a.message)
