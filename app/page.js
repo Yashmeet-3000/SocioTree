@@ -13,6 +13,14 @@ const Pop = Poppins({
   weight: ["400"],
 });
 export default function Home() {
+  const [tras, settras] = useState(false)
+  useEffect(() => {
+    setTimeout(() => {
+      settras(true)
+      
+    }, 250);
+    
+  }, [])
   const cardRef = useRef(null);
   const [transformStyle, setTransformStyle] = useState("");
   const handleMouseMove = (e) => {
@@ -82,31 +90,45 @@ export default function Home() {
             </span>
             <div className="flex flex-col md:flex-row gap-4 w-full">
               <div className="relative w-full md:w-[65%]">
-                <input onChange={(e) => { seth(e.target.value) }} value={h || ""} className="bg-white w-full py-3 px-4 md:pl-28 pl-[20%] text-[16px] md:text-[18px] text-[#978e8e] font-bold rounded-xl" />
-                <span className="absolute left-4 top-1/2 -translate-y-1/2 text-[#978e8e] font-bold text-[16px] md:text-[18px]">sociotr.ee/</span>
+                <input onChange={(e) => { seth(e.target.value) }} value={h || ""} className="bg-white w-full py-3 px-4  pl-3 text-[16px] md:text-[18px] text-[#978e8e] font-bold placeholder:text-[#978e8e]  rounded-xl" placeholder="Claim a handle" />
               </div>
               <button disabled={!(h.length)} onClick={() => { router.push(`${process.env.NEXT_PUBLIC_HOST}generate/?handle=${h}`) }} className="w-full md:w-[35%] py-3 text-[14px] md:text-[16px] bg-[#f4adf4] font-bold rounded-3xl hover:scale-[0.97] transition">Claim your tree</button>
             </div>
           </div>
 
-          <div className="w-[80%] md:w-[40%] flex justify-center items-center mt-10 md:mt-[10vh] px-5">
-            <Image
+          <div className="w-[80%]  md:w-[40%]   items-center mt-10 md:mt-[20vh] px-5">
+            <div
               ref={cardRef}
               onMouseMove={handleMouseMove}
-              className="w-full h-auto"
               style={{
                 transform: transformStyle,
                 transformStyle: "preserve-3d",
                 transition: "transform 0.2s ease",
               }}
-              objectFit="cover"
-              width={500}
-              height={500}
+              className="md:w-[50%] border-black border-4 w-55 mx-auto h-fit py-5 flex flex-col gap-y-2 justify-center  rounded-2xl bg-linear-to-t from-25% from-[#6c92e6]  to-[#0d52e6] px-3 items-center ">
 
-              src="/home.png"
-              alt=""
-            />
+              <Image className="object-contain rounded-[250px]" width={90} height={90} src="https://plus.unsplash.com/premium_photo-1683141410418-5c3da0819e20?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1pbi1zYW1lLXNlcmllc3wxfHx8ZW58MHx8fHx8" alt="" />
+
+              <div className=" flex flex-col w-fit justify-center items-center text-center gap-y-1">
+                <div className="handler text-black text-xl font-bold">Levi</div>
+                <div className={`"desc break-words  font-medium text-[16px] text-black"`}>Singer dancer</div>
+              </div>
+              <div className="flex flex-col w-full  gap-y-4  items-center  bg-transparent ">
+                
+                <div className={`text-white transition-all duration-150 ease-in p-2 ${tras ? 'translate-0 opacity-100' : '-translate-4 opacity-0'} h-fit rounded-2xl bg-[#101084e1] text-[14px] md:text-[16px]`}>Instagram</div>
+                <div className={`text-white transition-all duration-150 ease-in p-2 ${tras ? 'translate-0 opacity-100' : '-translate-4 opacity-0'} h-fit rounded-2xl bg-[#101084e1] text-[14px] md:text-[16px]`}>Twitter</div>
+                <div className={`text-white transition-all duration-150 ease-in p-2 ${tras ? 'translate-0 opacity-100' : '-translate-4 opacity-0'} h-fit rounded-2xl bg-[#101084e1] text-[14px] md:text-[16px]`}>Facebook</div>
+
+
+              </div>
+
+
+
+
+            </div>
+
           </div>
+
         </section>
 
         <section className="w-full h-fit flex flex-col bg-[#852bed] justify-center py-20">
@@ -184,7 +206,7 @@ export default function Home() {
 
 
       </main>
-      <Footer/>
+      <Footer />
 
     </>
 
