@@ -2,7 +2,6 @@
 import Footer from "@/app/components/Footer";
 import { Poppins } from "next/font/google";
 import { useState, useRef, useEffect } from "react";
-import { useSearchParams } from "next/navigation";
 import { useRouter } from 'next/navigation'
 import Image from "next/image";
 
@@ -73,7 +72,7 @@ export default function Home() {
   const [oldhan, setoldhan] = useState("")
   const [check1, setcheck1] = useState(true)
   const router = useRouter()
-  const params = useSearchParams()
+  
   return (
     <>
 

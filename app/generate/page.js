@@ -4,10 +4,20 @@ import { useState, useEffect } from 'react'
 import { ToastContainer, toast } from 'react-toastify'
 import { useSearchParams } from 'next/navigation'
 import Image from 'next/image'
-import router from 'next/navigation'
-
+import {useRouter} from 'next/navigation'
+import {Suspense} from 'react'
 
 const Page = () => {
+    return (
+        <Suspense fallback={<div>Loading...</div>}>
+            <PageContent />
+        </Suspense> 
+    )
+}
+
+
+const PageContent = () => {
+    const router = useRouter()
     const params = useSearchParams()
     const [handle, sethandle] = useState(params.get("handle"))
     const [links, setlinks] = useState([{ link: "", linktext: "" }])
@@ -246,5 +256,5 @@ const Page = () => {
         </>
     )
 }
+ export default Page
 
-export default Page
