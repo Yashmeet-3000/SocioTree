@@ -8,7 +8,6 @@
 
 import clientPromise from "@/lib/mongo";
 import Link from "next/link"
-import Image from "next/image";
 export default async function Page({ params }) {
 
 

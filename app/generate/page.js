@@ -39,7 +39,7 @@ const PageContent = () => {
                 headers: myHeaders,
                 body: raw,
             };
-            const re = await fetch(`${process.env.NEXT_PUBLIC_HOST}api/fetch`, requestOptions)
+            const re = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/fetch`, requestOptions)
             const a = await re.json()
             if (a.success) {
                 sethandone(true)
@@ -73,7 +73,7 @@ const PageContent = () => {
             setlinks([{ link: "", linktext: "" }])
             setpics("")
             setdesc("")
-            router.push(`${process.env.NEXT_PUBLIC_HOST}${handle}`)
+            router.push(`${process.env.NEXT_PUBLIC_HOST}/${handle}`)
         }
         else toast.error(data.message);
     }
@@ -143,7 +143,7 @@ const PageContent = () => {
             headers: myHeaders,
             body: raw,
         };
-        const re = await fetch(`${process.env.NEXT_PUBLIC_HOST}api/generate`, requestOptions)
+        const re = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/generate`, requestOptions)
         const a = await re.json()
         sethandle("")
         sethandone(false)
@@ -151,7 +151,7 @@ const PageContent = () => {
         setpics("")
         setdesc("")
         if (a.success) {
-            router.push(`${process.env.NEXT_PUBLIC_HOST}${handle}`)
+            router.push(`${process.env.NEXT_PUBLIC_HOST}/${handle}`)
             
 
         } else {

@@ -53,12 +53,12 @@ export default function Home() {
       headers: myHeaders,
       body: raw,
     };
-    const re = await fetch(`${process.env.NEXT_PUBLIC_HOST}api/check`, requestOptions)
+    const re = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/check`, requestOptions)
     const a = await re.json()
     if (a.success) {
       setcheck1(false)
     } else {
-      router.push(`${process.env.NEXT_PUBLIC_HOST}${oldhan}`)
+      router.push(`${process.env.NEXT_PUBLIC_HOST}/${oldhan}`)
 
 
     }
