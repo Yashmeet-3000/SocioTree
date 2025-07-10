@@ -78,7 +78,7 @@ export default function Home() {
   return (
     <>
 
-      <main className=" w-full min-h-screen relative ">
+      <main className=" w-full min-h-screen overflow-x-hidden relative ">
         <section className="w-full h-fit pb-10 flex flex-col md:flex-row justify-center md:justify-normal items-center gap-y-8 md:items-stretch bg-[#114511f2]">
           <div className="w-[90%] md:w-[50%] mx-auto px-4 flex flex-col items-center md:items-start gap-y-5 mt-[20vh]">
             <span className="text-[#ebff12] font-extrabold leading-tight text-center md:text-left text-[36px] md:text-[40px] lg:text-[48px] xl:text-[55px] 2xl:text-[64px]">
@@ -104,7 +104,7 @@ export default function Home() {
               spinDuration={20}
               className="custom-class "
             />
-            <img className="md:w-3/10 w-4/10 h-5 md:h-9 invert absolute top-[46%] md:top-[41%] -translate-x-[1%] transition-all  right-6/20 md:right-[34%] " src="https://cdn.prod.website-files.com/666255f7f2126f4e8cec6f8f/66634daccb34e6d65a41c76d_download.svg" alt="" />
+            <img className="md:w-[30%] w-[40%] h-5 md:h-9 invert absolute top-[50%]  translate-x-[50%] -translate-y-[50%]  transition-all  right-[50%]  " src="https://cdn.prod.website-files.com/666255f7f2126f4e8cec6f8f/66634daccb34e6d65a41c76d_download.svg" alt="" />
 
 
 
