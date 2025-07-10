@@ -21,6 +21,11 @@ export default function Home() {
     
   }, [])
   const cardRef = useRef(null);
+  const [h, seth] = useState("")
+  const [oldhan, setoldhan] = useState("") 
+  const [check1, setcheck1] = useState(true)
+  const router = useRouter()
+  
   const [transformStyle, setTransformStyle] = useState("");
   const handleMouseMove = (e) => {
     const rect = cardRef.current.getBoundingClientRect();
@@ -55,10 +60,10 @@ export default function Home() {
     };
     const re = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/check`, requestOptions)
     const a = await re.json()
-    if (a.success) {
-      setcheck1(false)
+    if (!a.success) {
+      router.push(`${process.env.NEXT_PUBLIC_HOST}/${oldhan}`);
     } else {
-      router.push(`${process.env.NEXT_PUBLIC_HOST}/${oldhan}`)
+      setcheck1(false);
 
 
     }
@@ -68,10 +73,6 @@ export default function Home() {
 
   }
 
-  const [h, seth] = useState("")
-  const [oldhan, setoldhan] = useState("")
-  const [check1, setcheck1] = useState(true)
-  const router = useRouter()
   
   return (
     <>
