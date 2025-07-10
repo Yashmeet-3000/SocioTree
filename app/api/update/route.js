@@ -10,7 +10,7 @@ export async function POST(req) {
     const collection = db.collection("Links")
     const result = await collection.updateOne(
       { handle },
-      { $set: { links, desc, pics } }
+      { $set: { links, desc, pics,Password } }
     );
     if (result.matchedCount === 0) {
         return Response.json({ success: false, message: "Handle not found" });

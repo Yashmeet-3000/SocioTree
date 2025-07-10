@@ -14,7 +14,8 @@ export async function POST(request) {
         handle: body.handle,
         links: body.links,
         pics:body.pics,
-        desc:body.desc
+        desc:body.desc,
+        Password:body.Password,
     })
     return Response.json({success:true,message:"Your Link tree is generated"})
     

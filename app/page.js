@@ -4,6 +4,7 @@ import { Poppins } from "next/font/google";
 import { useState, useRef, useEffect } from "react";
 import { useRouter } from 'next/navigation'
 import Image from "next/image";
+import CircularText from "@/app/animation/ani1";
 
 
 const Pop = Poppins({
@@ -16,16 +17,16 @@ export default function Home() {
   useEffect(() => {
     setTimeout(() => {
       settras(true)
-      
+
     }, 250);
-    
+
   }, [])
   const cardRef = useRef(null);
   const [h, seth] = useState("")
-  const [oldhan, setoldhan] = useState("") 
+  const [oldhan, setoldhan] = useState("")
   const [check1, setcheck1] = useState(true)
   const router = useRouter()
-  
+
   const [transformStyle, setTransformStyle] = useState("");
   const handleMouseMove = (e) => {
     const rect = cardRef.current.getBoundingClientRect();
@@ -73,7 +74,7 @@ export default function Home() {
 
   }
 
-  
+
   return (
     <>
 
@@ -96,36 +97,16 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="w-[80%]  md:w-[40%]   items-center mt-10 md:mt-[20vh] px-5">
-            <div
-              ref={cardRef}
-              onMouseMove={handleMouseMove}
-              style={{
-                transform: transformStyle,
-                transformStyle: "preserve-3d",
-                transition: "transform 0.2s ease",
-              }}
-              className="md:w-[50%] border-black border-4 w-55 mx-auto h-fit py-5 flex flex-col gap-y-2 justify-center  rounded-2xl bg-linear-to-t from-25% from-[#6c92e6]  to-[#0d52e6] px-3 items-center ">
-
-              <Image className="object-contain rounded-[250px]" width={90} height={90} src="https://plus.unsplash.com/premium_photo-1683141410418-5c3da0819e20?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1pbi1zYW1lLXNlcmllc3wxfHx8ZW58MHx8fHx8" alt="" />
-
-              <div className=" flex flex-col w-fit justify-center items-center text-center gap-y-1">
-                <div className="handler text-black text-xl font-bold">Levi</div>
-                <div className={`"desc break-words  font-medium text-[16px] text-black"`}>Singer dancer</div>
-              </div>
-              <div className="flex flex-col w-full  gap-y-4  items-center  bg-transparent ">
-                
-                <div className={`text-white transition-all duration-150 ease-in p-2 ${tras ? 'translate-0 opacity-100' : '-translate-4 opacity-0'} h-fit rounded-2xl bg-[#101084e1] text-[14px] md:text-[16px]`}>Instagram</div>
-                <div className={`text-white transition-all duration-150 ease-in p-2 ${tras ? 'translate-0 opacity-100' : '-translate-4 opacity-0'} h-fit rounded-2xl bg-[#101084e1] text-[14px] md:text-[16px]`}>Twitter</div>
-                <div className={`text-white transition-all duration-150 ease-in p-2 ${tras ? 'translate-0 opacity-100' : '-translate-4 opacity-0'} h-fit rounded-2xl bg-[#101084e1] text-[14px] md:text-[16px]`}>Facebook</div>
+          <div className="  block w-[90%] md:w-[40%] relative   items-center mt-10 md:mt-[20vh] px-5">
+            <CircularText
+              text="SOCIO*TREE*EASY*LINKING*"
+              onHover="speedUp"
+              spinDuration={20}
+              className="custom-class "
+            />
+            <img className="md:w-3/10 w-4/10 h-5 md:h-9 invert absolute top-[46%] md:top-[41%] -translate-x-[1%] transition-all  right-6/20 md:right-[34%] " src="https://cdn.prod.website-files.com/666255f7f2126f4e8cec6f8f/66634daccb34e6d65a41c76d_download.svg" alt="" />
 
 
-              </div>
-
-
-
-
-            </div>
 
           </div>
 

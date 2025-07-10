@@ -33,6 +33,7 @@ export default async function Page({ params }) {
                         <div className="flex flex-col w-7/20 px-8 gap-y-4 py-8 items-center  bg-transparent ">
                             {result.links.map((item) => {
                                 return (
+                                    
                                     <div key={item.linktext} className="h-10 w-fit items-center px-10 rounded-2xl  bg-[#0e0e8fd8] opacity-75  flex justify-center ">
                                         <Link className="active:text-[#928c8c]   " href={`${item.link}`}><span className="font-medium hover:font-semibold text-white text-[20px]">{item.linktext}</span></Link>
                                     </div>
