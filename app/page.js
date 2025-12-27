@@ -101,10 +101,26 @@ export default function Home() {
             <CircularText
               text="SOCIO*TREE*EASY*LINKING*"
               onHover="speedUp"
-              spinDuration={20}
+              spinDuration={60}
               className="custom-class "
             />
-            <img className="md:w-[30%] w-[40%] h-5 md:h-9 invert absolute top-[50%]  translate-x-[50%] -translate-y-[50%]  transition-all  right-[50%]  " src="https://cdn.prod.website-files.com/666255f7f2126f4e8cec6f8f/66634daccb34e6d65a41c76d_download.svg" alt="" />
+            <div className="absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] flex flex-col items-center justify-center">
+              <svg width="60" height="60" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="md:w-[80px] md:h-[80px] w-[50px] h-[50px]">
+                {/* Clover Leaves */}
+                <circle cx="50" cy="22" r="18" fill="#39E09B" />
+                <circle cx="78" cy="50" r="18" fill="#39E09B" />
+                <circle cx="22" cy="50" r="18" fill="#39E09B" />
+                <circle cx="50" cy="78" r="18" fill="#39E09B" />
+                {/* Connecting Stem */}
+                <path
+                  d="M35 35C35 35 65 35 65 50C65 65 35 65 35 80"
+                  stroke="white"
+                  strokeWidth="10"
+                  strokeLinecap="round"
+                />
+                <circle cx="50" cy="50" r="8" fill="white" />
+              </svg>
+            </div>
 
 
 
