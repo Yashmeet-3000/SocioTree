@@ -93,7 +93,7 @@ export default function Home() {
               <div className="relative w-full md:w-[65%]">
                 <input onChange={(e) => { seth(e.target.value) }} value={h || ""} className="bg-white w-full py-3 px-4  pl-3 text-[16px] md:text-[18px] text-[#978e8e] font-bold placeholder:text-[#978e8e]  rounded-xl" placeholder="Claim a handle" />
               </div>
-              <button disabled={!(h.length)} onClick={() => { router.push(`${process.env.NEXT_PUBLIC_HOST}generate/?handle=${h}`) }} className="w-full md:w-[35%] py-3 text-[14px] md:text-[16px] bg-[#f4adf4] font-bold rounded-3xl hover:scale-[0.97] transition">Claim your tree</button>
+              <button disabled={!(h.length)} onClick={() => { router.push(`/generate?handle=${h}`) }} className="w-full md:w-[35%] py-3 text-[14px] md:text-[16px] bg-[#f4adf4] font-bold rounded-3xl hover:scale-[0.97] transition">Claim your tree</button>
             </div>
           </div>
 
@@ -174,7 +174,7 @@ export default function Home() {
 
           </div>
         </section>
-        <section className="w-full md:h-[75vh] h-fit flex flex-col bg-[#670909] items-center py-20">
+        <section id="features" className="w-full md:h-[75vh] h-fit flex flex-col bg-[#670909] items-center py-20">
           <div className="container w-[90vw]  mx-auto flex space-y-35 flex-col ">
             <div className="text-[white] font-[Linksans text-center Linksansvf] md:ml-6  w-full font-extrabold  text-[25px]  h-fit md:text-[38px] lg:text-[45px]">Features</div>
             <div className="w-full flex flex-col   md:flex-row gap-y-50  md:gap-x-30   justify-center items-center mt-5">

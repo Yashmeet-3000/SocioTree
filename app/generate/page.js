@@ -26,65 +26,88 @@ const PageContent = () => {
     const [Password, setPassword] = useState("")
     const [handone, sethandone] = useState(false)
     const [check, setcheck] = useState(true)
+    const [loading, setLoading] = useState(false);
+    const [isNavbarEntry, setIsNavbarEntry] = useState(false);
     useEffect(() => {
         async function getoldhandle() {
+            const handleParam = params.get("handle");
+
+            // If no handle is in the URL, it's a Navbar entry
+            if (!handleParam) {
+                setIsNavbarEntry(true);
+                sethandone(false); // Keeps inputs hidden/locked as per your setup
+                return;
+            }
+
+            // If a handle exists, it's a Homepage/Direct entry
+            setIsNavbarEntry(false);
+
             const myHeaders = new Headers();
             myHeaders.append("Content-Type", "application/json");
-
-            const raw = JSON.stringify({
-                "handle": params.get("handle"),
-            });
-
+            const raw = JSON.stringify({ "handle": handleParam });
             const requestOptions = {
                 method: "POST",
                 headers: myHeaders,
                 body: raw,
             };
-            const re = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/fetch`, requestOptions)
-            const a = await re.json()
+
+            const re = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/fetch`, requestOptions);
+            const a = await re.json();
+
             if (a.success) {
-                const pass = prompt("Enter Password to update your handle")
+                const pass = prompt("Enter Password to update your handle");
                 if (pass === a.data.Password) {
-                    sethandone(true)
-                    setlinks(a.data.links)
-                    setpics(a.data.pics)
-                    setdesc(a.data.desc)
-                    setPassword(a.data.Password)
+                    sethandone(true); // Unlocks your entries
+                    setlinks(a.data.links);
+                    setpics(a.data.pics);
+                    setdesc(a.data.desc);
+                    setPassword(a.data.Password);
                 } else {
-                    toast.error("Wrong Password")
-                    router.push(`${process.env.NEXT_PUBLIC_HOST}/${params.get("handle")}`)
+                    toast.error("Wrong Password");
+                    router.push(`/${handleParam}`);
                 }
             } else {
-                toast(a.message)
-
+                // Handle doesn't exist, user can create it
+                sethandone(false);
+                toast(a.message);
             }
-
         }
-        getoldhandle()
-    }, [])
+        getoldhandle();
+    }, [params])
     async function updateHandler() {
+        // We use a local constant to "freeze" the handle name before clearing state
+        const currentHandle = handle;
+
         const res = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/update`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-                handle,
+                handle: currentHandle,
                 links,
                 desc,
                 pics,
-                Password,
+                password: Password, // Correctly mapping your uppercase State to lowercase API key
             }),
         });
+
         const data = await res.json();
 
         if (data.success) {
-            sethandle("")
-            sethandone(false)
-            setlinks([{ link: "", linktext: "" }])
-            setpics("")
-            setdesc("")
-            router.push(`${process.env.NEXT_PUBLIC_HOST}/${handle}`)
+            toast.success("Profile Updated!");
+
+            // Clear all states
+            sethandle("");
+            sethandone(false);
+            setlinks([{ link: "", linktext: "" }]);
+            setpics("");
+            setdesc("");
+            setPassword("");
+
+            // Redirect using the constant we saved at the start
+            router.push(`${process.env.NEXT_PUBLIC_HOST}/${currentHandle}`);
+        } else {
+            toast.error(data.message);
         }
-        else toast.error(data.message);
     }
 
     async function checkparam() {
@@ -137,6 +160,8 @@ const PageContent = () => {
     }
 
     async function addlink() {
+        if(loading) return;
+        setLoading(true);
         const myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
 
@@ -166,6 +191,7 @@ const PageContent = () => {
 
         } else {
             toast.error(a.message)
+            setLoading(false);
         }
 
 
@@ -240,13 +266,38 @@ const PageContent = () => {
                             </div>
                             <input onChange={(e) => { setPassword(e.target.value) }} value={Password || ""} className="bg-transparent outline-none border-[2px] border-black h-12   font-bold text-[white] py-3.5 px-2 text-[16px]  rounded-3xl placeholder:text-[white] placeholder:font-bold" type="text" placeholder='Enter Password' />
                             <div className="flex md:flex-row flex-col justify-center gap-y-6 items-center gap-x-3 w-full">
-                                <button disabled={!(pics.length && desc.length)} onClick={() => { addlink() }} className="bg-black w-[50%]   md:w-[30%] h-fit   py-2 md:py-auto font-bold md:text-[16px] lg:text-[21px]  text-white rounded-3xl disabled:opacity-85 transition duration-150 active:scale-90 active:cursor-pointer hover:cursor-pointer   ">Create Sociotree</button>
-                                <button disabled={!(pics.length && desc.length)} onClick={() => { updateHandler() }} className="bg-black h-fit w-[50%]   md:w-[30%]  py-2 md:py-auto font-bold md:text-[16px] lg:text-[21px]  text-white rounded-3xl disabled:opacity-85 transition duration-150 active:scale-90 active:cursor-pointer hover:cursor-pointer   ">Update Sociotree</button>
-
-
-
+                                {isNavbarEntry ? (
+                                    /* PATH A: Direct Navbar Entry - Only show Create */
+                                    <button
+                                        disabled={!(pics.length && desc.length)}
+                                        onClick={() => { addlink() }}
+                                        className="bg-black w-[50%] md:w-[30%] h-fit py-2 md:py-auto font-bold md:text-[16px] lg:text-[21px] text-white rounded-3xl disabled:opacity-85 transition duration-150 active:scale-90"
+                                    >
+                                        Create Sociotree
+                                    </button>
+                                ) : (
+                                    /* PATH B: Homepage/Search Entry - Logic depends on handone */
+                                    <>
+                                        {!handone ? (
+                                            <button
+                                                disabled={!(pics.length && desc.length || loading)}
+                                                onClick={() => { addlink() }}
+                                                className="bg-black w-[50%] md:w-[30%] h-fit py-2 md:py-auto font-bold md:text-[16px] lg:text-[21px] text-white rounded-3xl disabled:opacity-85 transition duration-150 active:scale-90"
+                                            >
+                                                Create Sociotree
+                                            </button>
+                                        ) : (
+                                            <button
+                                                disabled={!(pics.length && desc.length )}
+                                                onClick={() => { updateHandler() }}
+                                                className="bg-black h-fit w-[50%] md:w-[30%] py-2 md:py-auto font-bold md:text-[16px] lg:text-[21px] text-white rounded-3xl disabled:opacity-85 transition duration-150 active:scale-90"
+                                            >
+                                                Update Sociotree
+                                            </button>
+                                        )}
+                                    </>
+                                )}
                             </div>
-
 
 
 
